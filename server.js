@@ -23,7 +23,6 @@ const HTTP_PORT = process.env.PORT || 8080;
 app.use(cors());
 app.use(express.json())
 
-// Define a GET route that returns the JSON object
 app.get('/', (req, res) => {
   res.json({ message: 'API Listening' });
 });
