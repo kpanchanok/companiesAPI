@@ -1,3 +1,15 @@
+/*********************************************************************************
+*  WEB422 – Assignment 1
+*  I declare that this assignment is my own work in accordance with Seneca  Academic Policy.  
+*  No part of this assignment has been copied manually or electronically from any other source
+*  (including web sites) or distributed to other students.
+* 
+*  Name: Panchanok Kaewchinda Student ID: 145443214 Date: Sep 09,2023
+*  Cyclic Link: https://odd-blue-dhole-hem.cyclic.cloud/
+*
+********************************************************************************/ 
+
+
 require('dotenv').config();
 
 const CompaniesDB = require("./modules/companiesDB.js");
@@ -26,7 +38,7 @@ db.initialize(process.env.MONGODB_CONN_STRING).then(()=>{
 
 // Routes -----------------------
 
-// Add new Company
+// POST company
 app.post('/api/companies', (req, res) => {
   const newCompany = req.body;
   db.addNewCompany(newCompany)
@@ -73,7 +85,7 @@ app.get('/api/company/:name', (req, res) => {
     });
 });
 
-// PUT company
+// PUT company name
 app.get('/api/company/:name', (req, res) => {
   const name = req.params.name;
   db.updateCompanyByName(req.body, name)
@@ -86,7 +98,7 @@ app.get('/api/company/:name', (req, res) => {
     });
 });
 
-// DELETE company
+// DELETE company name
 app.delete('/api/company/:name', (req, res) => {
   const name = req.params.name;
   db.deleteCompanyByName(name)
