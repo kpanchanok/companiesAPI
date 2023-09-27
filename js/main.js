@@ -1,3 +1,4 @@
+
 // Variables
 let page = 1; // Current page
 const perPage = 10; // Items per page
