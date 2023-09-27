@@ -4,16 +4,111 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Week 1 Demo</title>
+
+    <!-- Bootstrap 5.1 CSS-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+
+    <!-- Main CSS-->
+    <link rel="stylesheet" href="css/main.css">
+
+    <title>Document</title>
 </head>
-<body> 
-    <h2>WEB422 Assignment 1 </h2>
-    <h4>Company Entity</h4>
-    <ul>
-        <li>Get all companies <a href="/api/companies?page=1&perPage=10">/api/companies</a></li>
-        <li>Get one companies <a href="/api/company/Babelgum">/api/company/Babelgum</a></li>
-    </ul>
-</body>
-</html>
+<body>
+    <!-- Nav Bar-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Panchanok - Company Data</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            
+            <form class="d-flex" id="searchForm">
+                <input class="form-control me-2" id="tag" type="search" placeholder="Tag (case insensitive)" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+                <button class="btn btn-outline-danger" id="clearForm" type="submit">Clear</button>
+            </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Column-->
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <table class="table" id="companiesTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                            <th>Founded</th>
+                            <th>Founders (1)</th>
+                            <th>Offices (1)</th>
+                            <th># of Employees</th>
+                            <th>Tags (2)</th>
+                            <th>Website</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+
+                <!-- Pagination-->
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                      <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous" id="previous-page">
+                          <span aria-hidden="true">&laquo;</span>
+                        </a>
+                      </li>
+                      <li class="page-item"><a class="page-link" href="#" id="current-page"></a></li>
+                      <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next" id="next-page">
+                          <span aria-hidden="true">&raquo;</span>
+                        </a>
+                      </li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="modal fade" tabindex="-1" id="detailsModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title"></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p></p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    
+    <!-- Bootstrap Minified JS File -->
+    <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"
+    ></script>
+
+    <!-- Main JS-->
+    <script src="js/main.js"></script>
+    
 </body>
 </html>

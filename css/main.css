@@ -1,0 +1,11 @@
+#companiesTable tr:hover { 
+    cursor: pointer; 
+}
+
+#clearForm {
+    margin-left: 2%;
+}
+
+.container {
+    margin-top: 2%;
+}

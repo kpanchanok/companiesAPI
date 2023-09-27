@@ -13,7 +13,7 @@
 require('dotenv').config();
 
 const CompaniesDB = require("./modules/companiesDB.js");
-const db = new CompaniesDB()
+const db = new CompaniesDB();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose'); 
