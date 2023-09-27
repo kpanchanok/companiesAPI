@@ -5,11 +5,12 @@ const perPage = 10; // Items per page
 // Function to load company data
 function loadCompanyData(tag = null){
     // Determine the API endpoint based on the tag parameter
-    const apiEndpoint = tag ? `/api/companies?page=${page}&perPage=${perPage}&tag=${tag}` : `/api/companies?page=${page}&perPage=${perPage}`;
+    const apiEndpoint = tag ? `/api/companies?page=${page}&perPage=${perPage}&tag=${tag}`
+        : `/api/companies?page=${page}&perPage=${perPage}`;
     
     // Fetch data from the API
     fetch(apiEndpoint)
-        .then((response) => response.json())
+        .then((res) => res.json())
         .then((data) => {
             // Check if tag is not null to hide pagination
             if (tag) {

@@ -2,10 +2,11 @@
     cursor: pointer; 
 }
 
-#clearForm {
+button #clearForm {
     margin-left: 2%;
 }
 
 .container {
     margin-top: 2%;
 }
+

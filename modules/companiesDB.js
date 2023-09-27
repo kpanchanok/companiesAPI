@@ -100,6 +100,6 @@ module.exports = class companiesDB {
   }
 
   deleteCompanyByName(name) {
-    return this.Movie.deleteOne({ name: name }).exec();
+    return this.Company.deleteOne({ name: name }).exec();
   }
 }
