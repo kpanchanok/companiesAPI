@@ -4,7 +4,7 @@
 *  No part of this assignment has been copied manually or electronically from any other source
 *  (including web sites) or distributed to other students.
 * 
-*  Name: ______________________ Student ID: __________________ Date: ____________________
+*  Name: Panchanok Kaewchinda Student ID: 145443214 Date: Sep 27,2023
 *
 ********************************************************************************/ 
 
@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
         tagField.value = "";
         loadCompanyData();
     });
-    
+
     loadCompanyData();
 });
 
