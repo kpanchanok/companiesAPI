@@ -1,4 +1,3 @@
-
 // Variables
 let page = 1; // Current page
 const perPage = 10; // Items per page
@@ -29,33 +28,36 @@ function loadCompanyData(tag = null){
             document.querySelector('#current-page').textContent = page;
 
             // Add click events to the table rows
-            const tableRows = document.querySelectorAll('#companiesTable tbody tr');
-            tableRows.forEach((row) => {
+            document.querySelectorAll('#companiesTable tbody tr').forEach((row) => {
                 row.addEventListener('click', () => {
                     const companyId = row.getAttribute('data-id');
-                    // Make a request to get company details using the companyId
+            
                     fetch(`/api/company/${companyId}`)
                         .then((response) => response.json())
                         .then((companyData) => {
                             // Populate the modal with company details
-                            const modalTitle = document.querySelector('.modal-title');
-                            modalTitle.textContent = companyData.name;
-
-                            const modalBody = document.querySelector('.modal-body');
-                            modalBody.innerHTML = `
-                                <strong>Category:</strong> ${companyData.category_code}<br /><br />
-                                <strong>Description:</strong> ${companyData.description}<br /><br />
-                                <strong>Overview:</strong> ${companyData.overview}<br /><br />
-                                <strong>Tag List:</strong> ${companyData.tag_list}<br /><br />
-                                <strong>Founded:</strong> ${companyData.founded_month}/${companyData.founded_day}/${companyData.founded_year}<br /><br />
-                                <strong>Key People:</strong> ${getFounderNames(companyData.relationships)}<br /><br />
-                                <strong>Products:</strong> ${companyData.products}<br /><br />
-                                <strong>Number of Employees:</strong> ${companyData.number_of_employees}<br /><br />
-                                <strong>Website:</strong> <a href="${companyData.homepage_url}" target="_blank">${companyData.homepage_url}</a><br /><br />
+                            document.querySelector('.modal-title').textContent = companyData.name;
+            
+                            document.querySelector('.modal-body').innerHTML = `
+                                <strong>Category:</strong> ${companyData.category_code || 'n/a'}<br /><br />
+                                <strong>Description:</strong> ${companyData.description || 'n/a'}<br /><br />
+                                <strong>Overview:</strong> ${companyData.overview || 'n/a'}<br />
+                                ${companyData.tag_list ? `<strong>Tag List:</strong><br />${companyData.tag_list.split(', ').map(tag => tag ? `• ${tag}` : '').join('<br />')}<br /><br />` : ''}
+                                <strong>Founded:</strong> ${new Date(companyData.founded_year, companyData.founded_month - 1, companyData.founded_day).toDateString() || 'n/a'}<br /><br />
+                                <strong>Key People:</strong> ${getFounderNames(companyData.relationships) || 'n/a'}<br /><br />
+                                <strong>Products:</strong><br />
+                                ${companyData.products.length ? companyData.products.map(products => `• ${products.name}`).join('<br />') : 'n/a'}<br /><br />
+                                <strong>Number of Employees:</strong> ${companyData.number_of_employees || 'n/a'}<br /><br />
+                                <strong>Website:</strong> <a href="${companyData.homepage_url || 'n/a'}" target="_blank">${companyData.homepage_url || 'n/a'}</a><br /><br />
                             `;
 
+            
                             // Show the modal
-                            $('#detailsModal').modal('show');
+                            const modal = new bootstrap.Modal(document.getElementById("detailsModal"), {
+                                backdrop: "static",
+                                keyboard: false
+                            });
+                            modal.show();
                         })
                         .catch((error) => {
                             console.error('Error fetching company details:', error);

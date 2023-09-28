@@ -23,7 +23,8 @@ const HTTP_PORT = process.env.PORT || 8080;
 
 app.use(cors());
 app.use(express.json())
-app.use(express.static(__dirname + '/companiesAPI'));
+
+
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, "/index.html"));
@@ -87,7 +88,7 @@ app.get('/api/company/:name', (req, res) => {
 });
 
 // PUT company name
-app.get('/api/company/:name', (req, res) => {
+app.put('/api/company/:name', (req, res) => {
   const name = req.params.name;
   db.updateCompanyByName(req.body, name)
     .then(() => {
