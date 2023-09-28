@@ -1,11 +1,14 @@
+// Variables
 let page = 1; // Current page
 const perPage = 10; // Items per page
 
+// Function to load company data
 function loadCompanyData(tag = null){
-
+    // Determine the API endpoint based on the tag parameter
     const apiEndpoint = tag ? `/api/companies?page=${page}&perPage=${perPage}&tag=${tag}`
         : `/api/companies?page=${page}&perPage=${perPage}`;
     
+    // Fetch data from the API
     fetch(apiEndpoint)
         .then((res) => res.json())
         .then((data) => {
@@ -67,13 +70,13 @@ function loadCompanyData(tag = null){
         });
 }
 
-// Get founder names
+// Helper function to get founder names
 function getFounderNames(relationships) {
     const founders = relationships.filter((relationship) => relationship.title.includes('Founder'));
     return founders.map((founder) => founder.person.first_name + ' ' + founder.person.last_name).join(', ');
 }
 
-// Convert a company object to a table row template
+// Helper function to convert a company object to a table row template
 const companyObjectToTableRowTemplate = (companyObj) => {
     return `
         <tr data-id="${companyObj.name}">
@@ -91,7 +94,7 @@ const companyObjectToTableRowTemplate = (companyObj) => {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Click event for the "previous page"
+    // Click event for the "previous page" pagination button
     document.querySelector("#previous-page").addEventListener("click", function () {
         if (page > 1) {
             page--;
@@ -99,27 +102,27 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Click event for the "next page"
+    // Click event for the "next page" pagination button
     document.querySelector("#next-page").addEventListener("click", function () {
         page++;
         loadCompanyData();
     });
 
-    // Submit event for the "searchForm"
+    // Submit event for the "searchForm" form
     document.querySelector("#searchForm").addEventListener("submit", function (e) {
         e.preventDefault();
         const tagField = document.querySelector("#tag");
         loadCompanyData(tagField.value);
     });
 
-    // Click event for the "clearForm"
+    // Click event for the "clearForm" button
     document.querySelector("#clearForm").addEventListener("click", function () {
         const tagField = document.querySelector("#tag");
         tagField.value = "";
         loadCompanyData();
     });
 
-    // Page loads
+    // Initial data load when the page loads
     loadCompanyData();
 });
 
