@@ -1,14 +1,21 @@
-// Variables
+/*********************************************************************************
+*  WEB422 – Assignment 2
+*  I declare that this assignment is my own work in accordance with Seneca Academic Policy.  
+*  No part of this assignment has been copied manually or electronically from any other source
+*  (including web sites) or distributed to other students.
+* 
+*  Name: ______________________ Student ID: __________________ Date: ____________________
+*
+********************************************************************************/ 
+
 let page = 1; // Current page
 const perPage = 10; // Items per page
 
-// Function to load company data
 function loadCompanyData(tag = null){
-    // Determine the API endpoint based on the tag parameter
+
     const apiEndpoint = tag ? `/api/companies?page=${page}&perPage=${perPage}&tag=${tag}`
         : `/api/companies?page=${page}&perPage=${perPage}`;
     
-    // Fetch data from the API
     fetch(apiEndpoint)
         .then((res) => res.json())
         .then((data) => {
@@ -20,7 +27,6 @@ function loadCompanyData(tag = null){
                 document.querySelector('.pagination').classList.remove('d-none');
             }
 
-            // Transform the data and add it to the table
             const tableBody = document.querySelector('#companiesTable tbody');
             tableBody.innerHTML = data.map(companyObjectToTableRowTemplate).join('');
 
@@ -35,7 +41,6 @@ function loadCompanyData(tag = null){
                     fetch(`/api/company/${companyId}`)
                         .then((response) => response.json())
                         .then((companyData) => {
-                            // Populate the modal with company details
                             document.querySelector('.modal-title').textContent = companyData.name;
             
                             document.querySelector('.modal-body').innerHTML = `
@@ -51,8 +56,6 @@ function loadCompanyData(tag = null){
                                 <strong>Website:</strong> <a href="${companyData.homepage_url || 'n/a'}" target="_blank">${companyData.homepage_url || 'n/a'}</a><br /><br />
                             `;
 
-            
-                            // Show the modal
                             const modal = new bootstrap.Modal(document.getElementById("detailsModal"), {
                                 backdrop: "static",
                                 keyboard: false
@@ -70,13 +73,13 @@ function loadCompanyData(tag = null){
         });
 }
 
-// Helper function to get founder names
+// Get founder names
 function getFounderNames(relationships) {
     const founders = relationships.filter((relationship) => relationship.title.includes('Founder'));
     return founders.map((founder) => founder.person.first_name + ' ' + founder.person.last_name).join(', ');
 }
 
-// Helper function to convert a company object to a table row template
+// Convert a company object to a table row template
 const companyObjectToTableRowTemplate = (companyObj) => {
     return `
         <tr data-id="${companyObj.name}">
@@ -94,7 +97,7 @@ const companyObjectToTableRowTemplate = (companyObj) => {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Click event for the "previous page" pagination button
+    // Click event for the previous page
     document.querySelector("#previous-page").addEventListener("click", function () {
         if (page > 1) {
             page--;
@@ -102,27 +105,26 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Click event for the "next page" pagination button
+    // Click event for the next page
     document.querySelector("#next-page").addEventListener("click", function () {
         page++;
         loadCompanyData();
     });
 
-    // Submit event for the "searchForm" form
+    // Submit event for the searchForm
     document.querySelector("#searchForm").addEventListener("submit", function (e) {
         e.preventDefault();
         const tagField = document.querySelector("#tag");
         loadCompanyData(tagField.value);
     });
 
-    // Click event for the "clearForm" button
+    // Click event for the clearForm
     document.querySelector("#clearForm").addEventListener("click", function () {
         const tagField = document.querySelector("#tag");
         tagField.value = "";
         loadCompanyData();
     });
-
-    // Initial data load when the page loads
+    
     loadCompanyData();
 });
 
