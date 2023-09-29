@@ -5,7 +5,7 @@
 *  (including web sites) or distributed to other students.
 * 
 *  Name: Panchanok Kaewchinda Student ID: 145443214 Date: Sep 09,2023
-*  Cyclic Link: https://odd-blue-dhole-hem.cyclic.cloud/
+*  Cyclic Link: https://different-neckerchief-mite.cyclic.cloud/
 *
 ********************************************************************************/ 
 
@@ -23,7 +23,6 @@ const HTTP_PORT = process.env.PORT || 8080;
 
 app.use(cors());
 app.use(express.json())
-app.use(express.static(path.join(__dirname)));
 
 
 app.get('/', (req, res) => {
