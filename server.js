@@ -5,7 +5,7 @@
 *  (including web sites) or distributed to other students.
 * 
 *  Name: Panchanok Kaewchinda Student ID: 145443214 Date: Sep 09,2023
-*  Cyclic Link: https://different-neckerchief-mite.cyclic.cloud/
+*  Cyclic Link: https://odd-blue-dhole-hem.cyclic.cloud/
 *
 ********************************************************************************/ 
 
@@ -13,20 +13,18 @@
 require('dotenv').config();
 
 const CompaniesDB = require("./modules/companiesDB.js");
-const db = new CompaniesDB();
+const db = new CompaniesDB()
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose'); 
-const path = require('path');
 const app = express();
 const HTTP_PORT = process.env.PORT || 8080;
 
 app.use(cors());
 app.use(express.json())
 
-
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, "/index.html"));
+  res.json({ message: 'API Listening' });
 });
 
 db.initialize(process.env.MONGODB_CONN_STRING).then(()=>{
@@ -87,7 +85,7 @@ app.get('/api/company/:name', (req, res) => {
 });
 
 // PUT company name
-app.put('/api/company/:name', (req, res) => {
+app.get('/api/company/:name', (req, res) => {
   const name = req.params.name;
   db.updateCompanyByName(req.body, name)
     .then(() => {
